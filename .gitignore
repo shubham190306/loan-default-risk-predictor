@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+env/
+
+# VSCode
+.vscode/
+
+# Data and outputs
+data/
+*.csv
+figures/
+*.sqlite3
+*.db
+
+# Model artifacts (optional - keep out of VCS if large)
+models/*.pkl
+models/*.joblib
+models/features.json
+
+# Node / frontend
+frontend/node_modules/
+dist/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+data/
+models/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pkl
+*.joblib
+.DS_Store
