@@ -1,8 +1,88 @@
 {
   "model_path": "models/xgb_calibrated_sigmoid.pkl",
-  "threshold": 0.24644936516445318,
   "preprocessing": "preprocessing.json",
-  "model_version": "xgb-calibrated-sigmoid-v1",
-  "training_cohort": "accepted loans issued 2015-01-01 onward with terminal status",
-  "probability_semantics": "estimated probability of Charged Off or Default"
+  "model_version": "xgb-calibrated-sigmoid-temporal-v2",
+  "threshold": 0.2327096991501967,
+  "threshold_objective": "maximum F1 on the 2017 validation period",
+  "training_cohort": "accepted loans issued 2015-01-01 through 2018-12-01 with terminal status",
+  "label_definition": "Charged Off or Default versus Fully Paid",
+  "label_maturity_note": "Only terminal statuses in the source are used; no fixed outcome horizon is available.",
+  "probability_semantics": "estimated probability of Charged Off or Default",
+  "split_definition": {
+    "train": {
+      "rows": 375546,
+      "positive": 75804,
+      "positive_rate": 0.20185010624530683,
+      "start": "2015-01-01",
+      "end": "2015-12-01"
+    },
+    "calibration": {
+      "rows": 293105,
+      "positive": 68252,
+      "positive_rate": 0.23285853192541922,
+      "start": "2016-01-01",
+      "end": "2016-12-01"
+    },
+    "validation": {
+      "rows": 169321,
+      "positive": 39169,
+      "positive_rate": 0.23132984095298278,
+      "start": "2017-01-01",
+      "end": "2017-12-01"
+    },
+    "test": {
+      "rows": 56318,
+      "positive": 8874,
+      "positive_rate": 0.15756951596292482,
+      "start": "2018-01-01",
+      "end": "2018-12-01"
+    }
+  },
+  "calibration": {
+    "method": "sigmoid",
+    "fit_period": "2016 calendar year",
+    "estimator": "FrozenEstimator"
+  },
+  "preprocessing_fit_period": "2015 calendar year only",
+  "model_parameters": {
+    "n_estimators": 200,
+    "max_depth": 6,
+    "learning_rate": 0.05,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "eval_metric": "logloss",
+    "tree_method": "hist",
+    "scale_pos_weight": 3.9541712838372645,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "metrics": {
+    "validation": {
+      "roc_auc": 0.7108114524212549,
+      "pr_auc": 0.4133244246768539,
+      "log_loss": 0.4904079799623608,
+      "brier_score": 0.16041465558808438,
+      "precision": 0.3542849526855924,
+      "recall": 0.6786489315530139,
+      "f1": 0.4655382271298348,
+      "flagged_rate": 0.4431228258751129,
+      "threshold": 0.2327096991501967
+    },
+    "test": {
+      "roc_auc": 0.7018463989582433,
+      "pr_auc": 0.29405587625708557,
+      "log_loss": 0.4176512366948259,
+      "brier_score": 0.13031083423172704,
+      "precision": 0.2546049759930161,
+      "recall": 0.6573135001126887,
+      "f1": 0.36704002013591747,
+      "flagged_rate": 0.40679711637487126,
+      "threshold": 0.2327096991501967
+    }
+  },
+  "raw_feature_count": 86,
+  "model_feature_count": 146,
+  "data_sha256": "3eae03c28fd9d2e8a076ebeb73507e8d4d0f44d90500decdb0936e0933d1f36a",
+  "model_sha256": "79d0c7895361c8295f622dbcb515e3c96a5713be476b4229599c43bf7a25ca14",
+  "manifest_sha256": "8218ecddd9425b732c83df5478eb6d4a7b7ac279456c255d37b320fb684eb8c0"
 }

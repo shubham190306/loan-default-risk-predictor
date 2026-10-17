@@ -19,8 +19,8 @@ notebooks/loan_default_modeling.ipynb
 
 Run it from the repository root. The default mode validates the existing model
 bundle and scores example applications without scanning the full CSV. Set
-`RUN_REBUILD = True` in the first code cell only when you intentionally want
-to build a candidate model from the large accepted-loans file.
+`LOAN_RUN_REBUILD=1` before executing the notebook only when you intentionally
+want to retrain from the large accepted-loans file.
 
 ```powershell
 python -m venv .venv
@@ -35,9 +35,9 @@ The notebook uses the following production artifacts:
 - `models/xgb_final_metadata.json` — release metadata and operating threshold
 - `models/preprocessing.json` — raw input contract and frozen feature transform
 
-The saved operating threshold is `0.24644936516445318`. The notebook checks
-that the raw application contract produces exactly 148 finite model features in
-the expected order.
+The saved operating threshold is recorded in `models/xgb_final_metadata.json`.
+The notebook checks that the raw application contract produces the expected
+finite model features in the expected order.
 
 ## Data
 
@@ -50,8 +50,10 @@ reads when rebuilding.
 
 ## Reproducibility notes
 
-The model bundle was trained on accepted loans issued from 2015 onward with a
-terminal status. A future release should use a time-aware train/validation/test
-split, fit preprocessing statistics on the training partition only, document
-the threshold objective, and evaluate subgroup stability and fairness before
-promotion.
+The retraining workflow uses 2015 for model fitting, 2016 for sigmoid
+calibration, 2017 for threshold selection, and 2018 for final testing. It fits
+learned preprocessing values on the training period only and records split
+metrics, checksums, and the threshold objective in the model metadata. The
+source provides terminal statuses rather than a fixed outcome horizon, so the
+bundle still requires independent maturity, stability, and fairness review
+before operational use.
