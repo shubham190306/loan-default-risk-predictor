@@ -1,0 +1,8 @@
+{
+  "model_path": "models/xgb_calibrated_sigmoid.pkl",
+  "threshold": 0.24644936516445318,
+  "preprocessing": "preprocessing.json",
+  "model_version": "xgb-calibrated-sigmoid-v1",
+  "training_cohort": "accepted loans issued 2015-01-01 onward with terminal status",
+  "probability_semantics": "estimated probability of Charged Off or Default"
+}

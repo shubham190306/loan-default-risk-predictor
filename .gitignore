@@ -1,41 +1,27 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Environments
+# Local Python environment
 .venv/
 venv/
 env/
 
-# VSCode
-.vscode/
-
-# Data and outputs
-data/
-*.csv
-figures/
-*.sqlite3
-*.db
-
-# Model artifacts (optional - keep out of VCS if large)
-models/*.pkl
-models/*.joblib
-models/features.json
-
-# Node / frontend
-frontend/node_modules/
-dist/
-
-# Python packaging
-build/
-dist/
-*.egg-info/
-data/
-models/
+# Python and notebook caches
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
-*.pyc
+
+# Large local data files
+*.csv
+data/
+
+# Local model binaries and notebook rebuild outputs
 *.pkl
 *.joblib
+notebooks/runs/
+notebooks/figures/
+
+# The checked-in production model is required by the notebook
+!models/xgb_calibrated_sigmoid.pkl
+
+# Local tooling and editor files
+.vscode/
+.pytest_cache/
 .DS_Store
